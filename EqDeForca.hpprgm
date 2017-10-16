@@ -1,0 +1,25 @@
+EXPORT FORCA()
+//This program calculates 2 forces using balance of forces.
+BEGIN
+PRINT(); //CLEAN
+LOCAL F1, F2, F3, F4, F5, F6;
+LOCAL A1, A2, A3, A4, A5, A6;
+LOCAL A, B, C, M1;
+INPUT({{A1,[0]},{A2,[0]}}, "Insert the angle with the positive X axis of the forces you don't know: ");
+INPUT({{F3,[0]},{A3,[0]},{F4,[0]},{A4,[0]},{F5,[0]},{A5,[0]},{F6,[0]},{A6,[0]}}, "Insert the data of the forces you know: ");
+PRINT("X axis: ");
+PRINT(CAS.a*COS(A1)+CAS.b*COS(A2)+F3*COS(A3)+F4*COS(A4)+F5*COS(A5)+F6*COS(A6)=0);
+PRINT("Y axis: ");
+PRINT(CAS.a*SIN(A1)+CAS.b*SIN(A2)+F3*SIN(A3)+F4*SIN(A4)+F5*SIN(A5)+F6*SIN(A6)=0);
+//L1 := CAS.solve({CAS.a*COS(A1)+CAS.b*COS(A2)+F3*COS(A3)+F4*COS(A4)+F5*COS(A5)+F6*COS(A6)=0,CAS.a*SIN(A1)+CAS.b*SIN(A2)+F3*SIN(A3)+F4*SIN(A4)+F5*SIN(A5)+F6*SIN(A6)=0},{CAS.a,CAS.b});
+//M1 := CAS.solve({CAS.a*COS(A1)+CAS.b*COS(A2)+F3*COS(A3)+F4*COS(A4)+F5*COS(A5)+F6*COS(A6)=0,CAS.a*SIN(A1)+CAS.b*SIN(A2)+F3*SIN(A3)+F4*SIN(A4)+F5*SIN(A5)+F6*SIN(A6)=0},{CAS.a,CAS.b});
+A := F3*COS(A3)+F4*COS(A4)+F5*COS(A5)+F6*COS(A6);
+B := F3*SIN(A3)+F4*SIN(A4)+F5*SIN(A5)+F6*SIN(A6);
+
+PRINT(A);
+PRINT(B);
+M1 := RREF([[COS(A1),COS(A2),-A],[SIN(A1),SIN(A2),-B]]);
+
+PRINT("VALOR DE F1: "+M1(1,3));
+PRINT("VALOR DE F2: "+M1(2,3));
+END;
